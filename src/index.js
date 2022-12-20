@@ -1,8 +1,23 @@
+import { initializeApp } from "firebase/app";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyApoiQjYcCru6se1AwrlrCtN7mjmYWpWj8",
+  authDomain: "pizzeriailmondo-caucota.firebaseapp.com",
+  projectId: "pizzeriailmondo-caucota",
+  storageBucket: "pizzeriailmondo-caucota.appspot.com",
+  messagingSenderId: "363418592611",
+  appId: "1:363418592611:web:3dc361379207be28e15f56",
+  measurementId: "G-YBV7E5R6BY"
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

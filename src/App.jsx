@@ -4,14 +4,13 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import Navbar from './components/Navbar/Navbar'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
-import { opcionesMenu, productosVta } from './mock';
 
 
 function App() {
 
   return (
     <BrowserRouter className='App'>
-      <Navbar tipProd={opcionesMenu}/>
+      <Navbar/>
       <Routes>
         <Route exact path='/' element={<ItemListContainer />}/>
         <Route exact path='/category/:nombreCategoria' element={<ItemListContainer />}/>

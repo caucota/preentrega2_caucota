@@ -1,30 +1,28 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
+import { collection, getFirestore, getDocs, query, where } from 'firebase/firestore';
 import Item from '../Item/Item'
 import "./ItemList.css"
-import { productosVta } from '../../mock';
-import { useState, useEffect } from 'react';
 
 const ItemList = ({tipoProd}) => {
-  const [item, setItem] = useState(productosVta);
-  const FiltrarProductos = new Promise((resolve, reject)=>{
-    let arrayProductosCategoria = [];
-    if(tipoProd !== '' ){
-        arrayProductosCategoria = productosVta.filter((prod) => prod.tipo == tipoProd)
-      } else {
-        arrayProductosCategoria = productosVta;
+  const [producto, setProducto] = useState([]);
+
+  useEffect( () => {
+    const db = getFirestore();
+    const prodFiltrados = query(collection(db, "Item"), where("tipo", "==", tipoProd));
+    getDocs(prodFiltrados).then( listaProd => {
+      if (listaProd.size === 0){
+        alert("No hay productos disponibles" )
+      }else{
+        setProducto( listaProd.docs.map( (prod) => ({id:prod.id, ...prod.data()}) ))
       }
-      resolve(arrayProductosCategoria);
-    }
-  )
-  useEffect( ()=>{
-    FiltrarProductos.then( (response)=>{
-      setItem(response)
-    }).catch( err => {console.log("Error en FiltrarProductos");})
+    })
   }, [tipoProd])
+
   return(
     <div className='cards__container'>
         {
-          item && item.map(prod => {
+          producto && producto.map(prod => {
                 return <Item key={'producto_'+prod.id} unProducto={prod}/>
             }
           )
