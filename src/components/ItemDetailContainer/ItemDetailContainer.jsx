@@ -15,7 +15,6 @@ const ItemDetailContainer = () => {
     getDoc(prodSeleccionado).then((snapshot)=>{
       if(snapshot.exists()){
         setItem([{id:snapshot.id, ...snapshot.data()}]);
-        console.log("item " + snapshot.data());
       }
     })
   },[id]);
