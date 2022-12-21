@@ -7,7 +7,6 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 
 
 function App() {
-
   return (
     <BrowserRouter className='App'>
       <Navbar/>
