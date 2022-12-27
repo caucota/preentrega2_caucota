@@ -14,7 +14,6 @@ export const CartContextProvider = ({children}) =>{
             setCart([...cart, {...item,cantidad}])
             setcantTotal(cantTotal+cantidad);
         }
-
     return(
         <CartContext.Provider
         value={{

@@ -24,7 +24,7 @@ const NavBar = () => {
 
     return(
         <div className='navbar'>
-            <a className="brand" href="/">Pizzería Il Mondo</a>
+            <Link className="brand" to="/">Pizzería Il Mondo</Link>            
             <div className='opciones__menu'>
                 {
                     categorias.map((opcion, index)=>{
