@@ -1,3 +1,39 @@
+import {createContext, useState, useContext} from 'react'
+
+export const CartContext = createContext()
+
+ export const useCartContext = () =>{
+    return useContext(CartContext);
+}
+
+export const CartContextProvider = ({children}) =>{
+        const [cart, setCart]=useState([]);
+        const [cantTotal, setcantTotal] = useState(0);
+
+    const addProducto = (item, cantidad)=> {
+            setCart([...cart, {...item,cantidad}])
+            setcantTotal(cantTotal+cantidad);
+        }
+
+    return(
+        <CartContext.Provider
+        value={{
+            cart,
+            cantTotal,
+            addProducto
+        }}
+        >
+            {children}
+        </CartContext.Provider>
+    )
+
+}
+
+
+
+/*
+
+
 import {createContext, useReducer, useContext} from 'react'
 import { CartReducer } from './CartReducer'
 
@@ -39,7 +75,7 @@ export{
     CartContextProvider,
     useCartContext,
 }
-
+*/
 
 /* const initialState = {
     count: 0,

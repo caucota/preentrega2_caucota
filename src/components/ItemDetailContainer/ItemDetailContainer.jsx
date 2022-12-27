@@ -5,6 +5,52 @@ import { useParams } from 'react-router-dom';
 import './ItemDetailContainer.css'
 import Card from 'react-bootstrap/Card';
 import ItemCount from '../ItemCount/ItemCount';
+import { useCartContext } from '../../Context/CartContext';
+
+const ItemDetailContainer = () => {
+  const {id} = useParams();
+  const [item, setItem] = useState({});
+  const {addProducto} = useCartContext();
+  useEffect(() =>{
+    const db = getFirestore();
+    const prodSeleccionado = doc(db, "Item",id);
+    getDoc(prodSeleccionado).then((snapshot)=>{
+      if(snapshot.exists()){
+        setItem({id:snapshot.id, ...snapshot.data()});
+      }
+    })
+  },[id]);
+   const onAdd = (cantidad) => {
+    addProducto(item,cantidad)
+   }
+  return (
+    <div className='card_detail_container'>
+     
+        <Card className="card__container"  style={{ width: '15rem' }}>
+            <Card.Img className="card__imagen" variant="top" src={item.img} />
+            <Card.Body className="card__body">
+              <Card.Title className="card__title">{item.nombre}</Card.Title>
+              <Card.Text className="card__text">
+                {"$" + item.precio}
+              </Card.Text>
+              <ItemCount onAdd={onAdd}/>
+            </Card.Body>
+        </Card>
+        
+     
+    </div>
+  )
+}
+
+export default ItemDetailContainer
+
+/* import React from 'react';
+import { useState, useEffect } from 'react';
+import { getFirestore, getDoc, doc } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
+import './ItemDetailContainer.css'
+import Card from 'react-bootstrap/Card';
+import ItemCount from '../ItemCount/ItemCount';
 
 const ItemDetailContainer = () => {
   const {id} = useParams();
@@ -39,4 +85,4 @@ const ItemDetailContainer = () => {
   )
 }
 
-export default ItemDetailContainer
+export default ItemDetailContainer */
