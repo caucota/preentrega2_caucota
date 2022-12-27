@@ -9,6 +9,7 @@ import ItemCount from '../ItemCount/ItemCount';
 const ItemDetailContainer = () => {
   const {id} = useParams();
   const [item, setItem] = useState([]);
+
   useEffect(() =>{
     const db = getFirestore();
     const prodSeleccionado = doc(db, "Item",id);
