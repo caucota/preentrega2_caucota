@@ -14,12 +14,16 @@ const CartContextProvider = ({children}) =>{
             setCart([...cart, {...item,cantidad}])
             setcantTotal(cantTotal+cantidad);
         }
+    const delProducto = (id)=> {
+        setCart(cart.filter( (prodEliminar) => prodEliminar.id != id));
+    }
     return(
         <CartContext.Provider
         value={{
             cart,
             cantTotal,
-            addProducto
+            addProducto,
+            delProducto
         }}
         >
             {children}
