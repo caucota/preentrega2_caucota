@@ -1,0 +1,33 @@
+.list__prod__contianer{
+    margin: 20px;
+}
+
+.lista__prod{
+    border: 1px black solid;
+    padding: 12px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex_row_elementos{
+    display: flex;
+    flex-direction: row;
+}
+
+.prod{
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    text-decoration: underline;
+}
+
+.img__cart{
+    width: 100px;
+}
+
+.cantidad__prod{
+    font-size: 20px;
+    text-align: center;
+}

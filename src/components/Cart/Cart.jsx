@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
     return (
-        
         <div>
             <Link to="/order">
                 <svg version="1.1" viewBox="0 0 512 512" >
