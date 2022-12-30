@@ -1,19 +1,20 @@
-import React, {useState} from 'react';
-import {addDoc, collection, getFirestore} from 'firebase/firestore';
+import React, {useState} from 'react';/* 
+import {addDoc, collection, getFirestore} from 'firebase/firestore'; */
 import './Order.css'
 import { useCartContext } from '../../Context/CartContext';
+import { Link } from "react-router-dom";
 
 
 
 const Order = () => {
-    const [idOrden, setIdOrden] = useState(null);
-    const [nombreComprador, setnombreComprador] = useState(null);
-    const { cart, delProducto } = useCartContext();
+    /* const [idOrden, setIdOrden] = useState(null);
+    const [nombreComprador, setnombreComprador] = useState(null); */
+    const { cart, delProducto, limpiarCarrito, totalOrden } = useCartContext();
+
     const Remove = (event) =>{
         delProducto(event.target.id);
     }
-
-    const grabarOrden = () => {
+    /* const grabarOrden = () => {
         
 
         const orden = {
@@ -31,12 +32,12 @@ const Order = () => {
 
     const setNombre = (event)=>{
         setnombreComprador(event.target.value)
-    }
+    } */
 
     return (
         <>
             <h1>Carrito</h1>
-            <input id='nombre' onBlur={setNombre}></input>
+            {/* <input id='nombre' onBlur={setNombre}></input> */}
             <div className='list__prod__contianer'>
                 {
                     cart.map((prod,index) =>
@@ -45,17 +46,25 @@ const Order = () => {
                                 <img className='img__cart' src={prod.img} alt="" />
                                 <p className='prod'>{prod.nombre}</p>
                             </div>
-                            <div >
-                                <h2 className='cantidad__prod'>{prod.cantidad}</h2>
+                            <div className='precio__descripcion'>
+                                <p>{prod.descripcion}</p>
+                                <p>${prod.precio*prod.cantidad}</p>
+                            </div>
+                            <div className='cantidad_prod__eliminar'>
+                                <span className='cantidad__prod'>{prod.cantidad}</span>
                                 <button id={prod.id} onClick={Remove}>Eliminar</button>
                             </div>
                         </div>
                     )
                 }
             </div>
+            <h2>Total: ${totalOrden}</h2>
             <div>
-                <button >Cancelar Compra</button>
-                <button onClick={grabarOrden}>Continuar Compra</button>
+                <button onClick={limpiarCarrito} >Cancelar Compra</button>
+                <Link to='/checkout'>
+                    <button>Continuar</button>
+                </Link>
+                {/* <button onClick={grabarOrden}>Continuar Compra</button> */}
             </div>
         </>
     )

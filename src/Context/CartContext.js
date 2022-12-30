@@ -8,22 +8,39 @@ const useCartContext = () =>{
 
 const CartContextProvider = ({children}) =>{
         const [cart, setCart]=useState([]);
-        const [cantTotal, setcantTotal] = useState(0);
+        const [totalOrden, setTotalOrden] = useState(0);
+        /* const [cantTotal, setcantTotal] = useState(0); */
 
     const addProducto = (item, cantidad)=> {
-            setCart([...cart, {...item,cantidad}])
-            setcantTotal(cantTotal+cantidad);
+            let nuevoArray;
+            let elemento = cart.find(producto => producto.id === item.id);
+            if(elemento){
+                elemento.cantidad += cantidad;
+                nuevoArray = [...cart];
+            }else{
+                elemento = {...item, cantidad:cantidad};
+                nuevoArray = [...cart, elemento];
+            }
+            setTotalOrden(totalOrden + (item.precio*cantidad));
+            setCart(nuevoArray);
+            /* setCart([...cart, {...item,cantidad}]); */
+            /* setcantTotal(cantTotal+cantidad); */
         }
     const delProducto = (id)=> {
+        const articuloAEliminar = cart.filter((prodAeliminar) => prodAeliminar.id == id);
+        setTotalOrden(totalOrden - (articuloAEliminar[0].precio*articuloAEliminar[0].cantidad));
         setCart(cart.filter( (prodEliminar) => prodEliminar.id != id));
     }
+    const limpiarCarrito = () => {setCart([]); setTotalOrden(0)};
     return(
         <CartContext.Provider
         value={{
             cart,
-            cantTotal,
+            /* cantTotal, */
+            totalOrden,
             addProducto,
-            delProducto
+            delProducto,
+            limpiarCarrito
         }}
         >
             {children}

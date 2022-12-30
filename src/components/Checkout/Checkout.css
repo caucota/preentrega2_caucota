@@ -1,30 +1,38 @@
+.container__checkout{
+    padding: 0px 10px 0px 10px;
+}
+
+.container__inputs{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+input{
+    margin-bottom: 10px;
+}
+
 .list__prod__contianer{
     margin: 20px;
 }
 
 .lista__prod{
     border: 1px black solid;
+    border-radius: 10px;
     padding: 12px;
     margin-bottom: 5px;
     display: flex;
     justify-content: space-between;
 }
 
+.cantidad__checkout{
+    display: flex;
+    align-items: center;
+}
+
 .flex_row_elementos{
     display: flex;
     flex-direction: row;
-}
-
-.precio__descripcion{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.cantidad_prod__eliminar{
-    display: flex;
-    align-items: center;
 }
 
 .prod{
@@ -41,6 +49,10 @@
 
 .cantidad__prod{
     font-size: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
     color: red;
+}
+
+p{
+    margin: 0px;
 }

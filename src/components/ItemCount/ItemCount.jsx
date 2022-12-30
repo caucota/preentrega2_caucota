@@ -3,28 +3,28 @@ import Button from 'react-bootstrap/Button';
 import './ItemCount.css';
 
 
-function ItemCount({onAdd}) {
-    const [count, setCount]= useState(0)
-    const sumar = () =>{
-        if(count < 10){
+function ItemCount({ onAdd }) {
+    const [count, setCount] = useState(0)
+    const sumar = () => {
+        if (count < 10) {
             setCount(count + 1)
         }
     }
-    const restar = () =>{
-        if(count > 0){
+    const restar = () => {
+        if (count > 0) {
             setCount(count - 1)
         }
     }
 
     return (
-       <>
-        <div className='card_button_container'>
-            <Button className="card_button detail_button" onClick={restar}>-</Button>
-            <div className='card__counter'>{count}</div>
-            <Button className="card_button detail_button" onClick={sumar} >+</Button>
-        </div>
-        <Button className="card_button detail_button" onClick={()=>{onAdd(count); setCount(0)}}>Agregar al Carrito</Button>
-       </>
+        <>
+            <div className='card_button_container'>
+                <Button className="card_button detail_button" onClick={restar}>-</Button>
+                <div className='card__counter'>{count}</div>
+                <Button className="card_button detail_button" onClick={sumar} >+</Button>
+            </div>
+            <Button className="card_button detail_button" onClick={() => { onAdd(count); setCount(0) }}>Agregar al Carrito</Button>
+        </>
     )
 }
 
