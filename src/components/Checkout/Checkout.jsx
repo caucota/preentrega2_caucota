@@ -5,16 +5,46 @@ import { useCartContext } from '../../Context/CartContext';
 
 const Checkout = () =>{
     
-    const { cart, totalOrden } = useCartContext();
+    const { cart, totalOrden, limpiarCarrito } = useCartContext();
 
     const [idOrden, setIdOrden] = useState(null);
 
     const [nombreComprador, setnombreComprador] = useState(null);
     const [apellidoComprador, setapellidoComprador] = useState(null);
     const [telefonoComprador, settelefonoComprador] = useState(null);
-    const [emailComprador, setemailComprador] = useState(null);
+    const [email1Comprador, setemail1Comprador] = useState(null);
+    const [email2Comprador, setemail2Comprador] = useState(null);
 
     const grabarOrden = () => {
+        let sePuedeGrabar = true;
+        if(email1Comprador != email2Comprador){
+            sePuedeGrabar = false;
+            alert("El correo ingresado no coincide con la confirmación.");
+        }
+        if(sePuedeGrabar && (cart==undefined || cart == null||  cart == [] || !cart.length)){
+            sePuedeGrabar = false;
+            alert("No hay articulos en su carrito de compra.");
+        }
+        if(sePuedeGrabar && (nombreComprador=='' || nombreComprador == null)){
+            sePuedeGrabar = false;
+            alert("Debe ingresar su Nombre.");
+        }
+        if(sePuedeGrabar && (apellidoComprador=='' || apellidoComprador == null)){
+            sePuedeGrabar = false;
+            alert("Debe ingresar su Apellido.");
+        }
+        if(sePuedeGrabar && (telefonoComprador=='' || telefonoComprador == null)){
+            sePuedeGrabar = false;
+            alert("Debe ingresar su Teléfono.");
+        }
+        if(sePuedeGrabar && (email1Comprador=='' || email1Comprador == null)){
+            sePuedeGrabar = false;
+            alert("Debe ingresar su Email.");
+        }
+
+        if(!sePuedeGrabar){
+            return;
+        }
         const arrayFirebase = [];
         cart.forEach((prod) => {
             arrayFirebase.push({id: prod.id, tipo: prod.tipo ,nombre: prod.nombre, descripcion: prod.descripcion, precio: prod.precio, cantidad: prod.cantidad});
@@ -28,7 +58,7 @@ const Checkout = () =>{
 
         const orden = {
         fecha: fechaActual,
-        comprador:{ nombre: nombreComprador, apellido: apellidoComprador, phone: telefonoComprador, mail: emailComprador },
+        comprador:{ nombre: nombreComprador, apellido: apellidoComprador, phone: telefonoComprador, mail: email1Comprador },
         items: arrayFirebase,
         total: totalOrden,
         estado:"Generada",
@@ -36,7 +66,11 @@ const Checkout = () =>{
     
         const db = getFirestore();
         const ordenes = collection(db, 'ordenes');
-        addDoc(ordenes, orden).then(({id}) => {setIdOrden(id); alert("Su pedido ha sido registrado con éxito, bajo el código " + id)}
+        addDoc(ordenes, orden).then(({id}) => {
+            setIdOrden(id); 
+            alert("Su pedido ha sido registrado con éxito, bajo el código " + id);
+            limpiarCarrito();
+        }
         )
     }
 
@@ -50,7 +84,12 @@ const Checkout = () =>{
         settelefonoComprador(event.target.value)
     }
     const setEmail = (event)=>{
-        setemailComprador(event.target.value)
+        if (event.target.id == "email1"){
+            setemail1Comprador(event.target.value);
+        }
+        if (event.target.id == "email2"){
+            setemail2Comprador(event.target.value);
+        }
     }
 
 
@@ -58,11 +97,11 @@ const Checkout = () =>{
         <div className="container__checkout">
             <h1>Ingrese sus datos</h1>
             <div className="container__inputs">
-                <input id='nombre' onBlur={setNombre} type="text" placeholder="Nombre"/>
-                <input id="apellido" type="text" onBlur={setApellido} placeholder="Apellido"/>
-                <input id="telefono" type="number" onBlur={setTelefono} placeholder="Teléfono"/>
-                <input id="email1" type="email" onBlur={setEmail} placeholder="Email"/>
-                {/* <input id="email2" type="email" placeholder="Repetir Email"/> */}
+                <input id='nombre' onBlur={setNombre} type="text" placeholder="Nombre" required />
+                <input id="apellido" type="text" onBlur={setApellido} placeholder="Apellido" required/>
+                <input id="telefono" type="number" onBlur={setTelefono} placeholder="Teléfono" required />
+                <input id="email1" type="email" onBlur={setEmail} placeholder="Email" required/>
+                <input id="email2" type="email" onBlur={setEmail} placeholder="Repetir Email" required/>
             </div>
             <div className='list__prod__contianer'>
                 {
@@ -80,7 +119,7 @@ const Checkout = () =>{
                 )
                 }
             </div>
-            <h2>Total: {totalOrden}</h2>
+            <h2>Total:$ {totalOrden}</h2>
             <button onClick={grabarOrden}>Finalizar Compra</button>
         </div>
     )
