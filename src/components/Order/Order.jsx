@@ -2,7 +2,7 @@ import React, {useState} from 'react';/*
 import {addDoc, collection, getFirestore} from 'firebase/firestore'; */
 import './Order.css'
 import { useCartContext } from '../../Context/CartContext';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -11,9 +11,26 @@ const Order = () => {
     const [nombreComprador, setnombreComprador] = useState(null); */
     const { cart, delProducto, limpiarCarrito, totalOrden } = useCartContext();
 
+    const navigate = useNavigate();
+
+    function irCheckout (){
+        navigate('/checkout')
+    }
+
     const Remove = (event) =>{
         delProducto(event.target.id);
     }
+
+    /* const verfContinuarCompra = () =>{
+        if(cart != []){
+            return irCheckout();
+        }else{
+            alert("El carrito está vacío");
+        }
+    }
+    console.log(cart);
+    console.log(verfContinuarCompra); */
+
     /* const grabarOrden = () => {
         
 
@@ -61,9 +78,7 @@ const Order = () => {
             <h2>Total: ${totalOrden}</h2>
             <div>
                 <button onClick={limpiarCarrito} >Cancelar Compra</button>
-                <Link to='/checkout'>
-                    <button>Continuar</button>
-                </Link>
+                <button onClick={(irCheckout)}>Continuar</button>
                 {/* <button onClick={grabarOrden}>Continuar Compra</button> */}
             </div>
         </>

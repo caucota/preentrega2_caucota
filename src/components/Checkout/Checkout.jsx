@@ -2,9 +2,11 @@ import React, {useState}from "react";
 import './Checkout.css';
 import {addDoc, collection, getFirestore} from 'firebase/firestore';
 import { useCartContext } from '../../Context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () =>{
-    
+    const navigate = useNavigate();
+
     const { cart, totalOrden, limpiarCarrito } = useCartContext();
 
     const [idOrden, setIdOrden] = useState(null);
@@ -70,6 +72,7 @@ const Checkout = () =>{
             setIdOrden(id); 
             alert("Su pedido ha sido registrado con éxito, bajo el código " + id);
             limpiarCarrito();
+            volverInicio();
         }
         )
     }
@@ -92,6 +95,9 @@ const Checkout = () =>{
         }
     }
 
+    function volverInicio (){
+        navigate ('/')
+    }
 
     return(
         <div className="container__checkout">
@@ -120,7 +126,7 @@ const Checkout = () =>{
                 }
             </div>
             <h2>Total:$ {totalOrden}</h2>
-            <button onClick={grabarOrden}>Finalizar Compra</button>
+            <button onClick={(grabarOrden)}>Finalizar Compra</button>
         </div>
     )
 }

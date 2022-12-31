@@ -32,6 +32,7 @@ const CartContextProvider = ({children}) =>{
         setCart(cart.filter( (prodEliminar) => prodEliminar.id != id));
     }
     const limpiarCarrito = () => {setCart([]); setTotalOrden(0)};
+
     return(
         <CartContext.Provider
         value={{

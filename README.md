@@ -1,4 +1,24 @@
-# Getting Started with Create React App
+# :pizza:Pizzeria Il Mondo
+1. [Información General](http://handlebarsjs.com/)
+2. [Tecnologías](http://handlebarsjs.com/)
+3. [Desarrolladores](http://handlebarsjs.com/)
+
+## Información General
+- Es un proyecto creado para la puesta en práctica de los conocimientos adquiridos en el curso de Reactjs, tomándose como idea base la creación de un eCommers, caso particular, de una pizzería, a modo de mostrar el proceso de realización de una compra online y el registro de dicha compra dentro de una base de datos de Firebase.
+
+- En futuras versiones se procurara establecer la base de datos de forma local para evitar la dependencia de terceros y se mejorara el diseño de la misma.
+
+
+## :computer:Tecnologías
+Lista de tecnologías utilizadas en este proyecto:
+-   [Node.js](https://nodejs.org/en/): Versión 18.12.0
+-   [React-Bootstrap](https://react-bootstrap.github.io/): Versión 2.7.0
+-   [Firebase](https://firebase.google.com/): Version 9.15.0
+-   [react-router-dom ](https://www.npmjs.com/package/react-router-dom):Version 6.4.4
+
+## Dependencias
+- Además de las dependencias `npm` utilizadas en las clases se utilizó react-bootstrap para mejorar el aspecto visual de algunos componentes.
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +87,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->

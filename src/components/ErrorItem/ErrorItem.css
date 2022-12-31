@@ -1,0 +1,10 @@
+.container__error__item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.texto__error{
+    color: red;
+}

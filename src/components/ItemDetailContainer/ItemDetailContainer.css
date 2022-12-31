@@ -3,6 +3,16 @@
 }
 
 .card__detail__container{
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.card__text{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.descripcion__text{
+    padding-top: 10px;
 }

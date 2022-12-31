@@ -18,7 +18,7 @@ function ItemCount({ onAdd }) {
 
     return (
         <>
-            <div className='card_button_container'>
+            <div className='card_button_container' style={{display: 'flex'}}>
                 <Button className="card_button detail_button" onClick={restar}>-</Button>
                 <div className='card__counter'>{count}</div>
                 <Button className="card_button detail_button" onClick={sumar} >+</Button>
